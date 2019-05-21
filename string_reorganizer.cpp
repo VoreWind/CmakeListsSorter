@@ -28,11 +28,17 @@ QString StringReorganizer::ReorganizeString(const QString &source_string) {
   if (source_string.contains("\"")) {
     return "";
   }
-
   QStringList sortable_list = source_string.split("\n");
+  if (sortable_list.count() == 1) {
+    return "";
+  }
+  qint32 spaces_amount = sortable_list.at(1).count(" ");
   sortable_list = sortable_list.replaceInStrings(" ", "");
   sortable_list.sort();
-  QString sorted_string = sortable_list.join("\n");
+
+  QString padding;
+  padding = padding.leftJustified(spaces_amount, ' ');
+  QString sorted_string = sortable_list.join("\n"+padding);
   if (sorted_string == source_string) {
     return "";
   }

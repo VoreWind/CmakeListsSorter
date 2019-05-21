@@ -63,5 +63,5 @@ int main(int argc, char *argv[]) {
       ScriptLauncher::LaunchCmakeFormatScript(cmake_format_dir);
   }
   qDebug()<<"Done!";
-  return a.exec();
+  return 0;
 }
