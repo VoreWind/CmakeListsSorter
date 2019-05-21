@@ -1,4 +1,4 @@
-#include "stringreorganizer.h"
+#include "string_reorganizer.h"
 
 #include <QFile>
 #include <QRegExp>
