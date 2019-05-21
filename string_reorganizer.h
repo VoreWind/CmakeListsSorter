@@ -13,8 +13,7 @@ public:
 private:
   static QString ReorganizeString(const QString &source_string);
   static QString FindSortableString(const QString &source_string);
-
-private:
+  static QByteArray GetFileText(QFile &source_file);
 };
 
 #endif // STRING_REORGANIZER_H

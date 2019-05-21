@@ -7,10 +7,16 @@
 
 static const QString kLinkWithText = "LINK_WITH ";
 
+QByteArray StringReorganizer::GetFileText(QFile &source_file)
+{
+    source_file.open(QIODevice::ReadOnly);
+    QByteArray file_text = source_file.readAll();
+    source_file.close();
+    return file_text;
+}
+
 void StringReorganizer::SortArgumentsInFile(QFile &source_file) {
-  source_file.open(QIODevice::ReadOnly);
-  QByteArray file_text = source_file.readAll();
-  source_file.close();
+  auto file_text = GetFileText(source_file);
 
   QString sortable_string = FindSortableString(file_text);
   QString sorted_string = ReorganizeString(sortable_string);
@@ -19,15 +25,12 @@ void StringReorganizer::SortArgumentsInFile(QFile &source_file) {
     file_text.replace(sortable_string.toLatin1(), sorted_string.toLatin1());
     source_file.open(QIODevice::WriteOnly | QIODevice::Truncate);
     source_file.write(file_text);
-    source_file.close();
   }
 }
 
 bool StringReorganizer::CheckArgumentsInFile(QFile &source_file)
 {
-    source_file.open(QIODevice::ReadOnly);
-    QByteArray file_text = source_file.readAll();
-    source_file.close();
+    auto file_text = GetFileText(source_file);
 
     QString sortable_string = FindSortableString(file_text);
     QString sorted_string = ReorganizeString(sortable_string);
