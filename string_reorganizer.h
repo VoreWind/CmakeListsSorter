@@ -8,6 +8,7 @@ class QFile;
 class StringReorganizer {
 public:
   static void SortArgumentsInFile(QFile &source_file);
+  static bool CheckArgumentsInFile(QFile &source_file);
 
 private:
   static QString ReorganizeString(const QString &source_string);

@@ -13,7 +13,6 @@ void StringReorganizer::SortArgumentsInFile(QFile &source_file) {
   source_file.close();
 
   QString sortable_string = FindSortableString(file_text);
-
   QString sorted_string = ReorganizeString(sortable_string);
 
   if (!sorted_string.isEmpty()) {
@@ -22,6 +21,21 @@ void StringReorganizer::SortArgumentsInFile(QFile &source_file) {
     source_file.write(file_text);
     source_file.close();
   }
+}
+
+bool StringReorganizer::CheckArgumentsInFile(QFile &source_file)
+{
+    source_file.open(QIODevice::ReadOnly);
+    QByteArray file_text = source_file.readAll();
+    source_file.close();
+
+    QString sortable_string = FindSortableString(file_text);
+    QString sorted_string = ReorganizeString(sortable_string);
+
+    if (sorted_string.isEmpty() || sorted_string == sortable_string) {
+        return true;
+    }
+    return false;
 }
 
 QString StringReorganizer::ReorganizeString(const QString &source_string) {
