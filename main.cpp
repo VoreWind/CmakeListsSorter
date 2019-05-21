@@ -60,6 +60,8 @@ int main(int argc, char *argv[]) {
   }
 
   if (!cmake_format_dir.isEmpty()) {
+      ScriptLauncher::LaunchCmakeFormatScript(cmake_format_dir);
   }
+  qDebug()<<"Done!";
   return a.exec();
 }
